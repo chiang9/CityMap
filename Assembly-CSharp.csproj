@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MapReader.cs" />
     <Compile Include="Assets\Scripts\MercatorProjection.cs" />
+    <Compile Include="Assets\Scripts\Serialization\BaseNode.cs" />
+    <Compile Include="Assets\Scripts\Serialization\OsmBound.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmNode.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmNodeParser.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmWay.cs" />
