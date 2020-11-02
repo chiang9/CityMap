@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class MapReader : MonoBehaviour
 {
+    Dictionary<ulong, OsmNode> nodes;
+
     [Tooltip("The resouce file for OSM data")]
     public string resourceFile;
 
     void Start()
     {
+        nodes = new Dictionary<ulong, OsmNode>();
+
         var txtAsset = Resources.Load<TextAsset>(resourceFile);
 
         XmlDocument doc = new XmlDocument();
@@ -25,22 +29,27 @@ public class MapReader : MonoBehaviour
 
     private void GetWays(XmlNodeList xmlNodeList)
     {
-        throw new NotImplementedException();
+
     }
 
     private void SetNodes(XmlNodeList xmlNodeList)
     {
-        throw new NotImplementedException();
+        foreach (XmlNode n in xmlNodeList)
+        {
+            OsmNode node = new OsmNode(n);
+            nodes[node.ID] = node;
+
+        }
     }
 
     private void SetBounds(XmlNode xmlNode)
     {
-        throw new NotImplementedException();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

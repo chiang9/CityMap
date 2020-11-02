@@ -263,3 +263,5 @@ __pycache__/
 /Library
 /ProjectSettings
 /Temp
+# CityMap.sln
+# Assembly-CSharp.csproj
