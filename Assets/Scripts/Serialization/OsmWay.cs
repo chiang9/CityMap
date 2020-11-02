@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using TMPro;
 
 class OsmWay : BaseNode
 {
@@ -17,6 +18,8 @@ class OsmWay : BaseNode
 
     public float Height { get; private set; }
 
+    public bool isBuilding { get; private set; }
+
     public OsmWay(XmlNode node)
     {
         nodeIDs = new List<ulong>();
@@ -26,7 +29,7 @@ class OsmWay : BaseNode
         visible = GetAttribute<bool>("visible", node.Attributes);
 
         XmlNodeList nds = node.SelectNodes("nd");
-        foreach(XmlNode n in nds)
+        foreach (XmlNode n in nds)
         {
             ulong refNo = GetAttribute<ulong>("ref", n.Attributes);
             nodeIDs.Add(refNo);
@@ -37,6 +40,11 @@ class OsmWay : BaseNode
             isBoundary = nodeIDs[0] == nodeIDs[nodeIDs.Count - 1];
         }
 
+        tagClassification(node);
+    }
+
+    private void tagClassification(XmlNode node)
+    {
         XmlNodeList tags = node.SelectNodes("tag");
         foreach (XmlNode tag in tags)
         {
@@ -49,9 +57,11 @@ class OsmWay : BaseNode
             {
                 Height = heightRatio * GetAttribute<float>("v", tag.Attributes);
             }
+            else if (key == "building")
+            {
+                isBuilding = true;
+            }
         }
     }
-
-
 }
 

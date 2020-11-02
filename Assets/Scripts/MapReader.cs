@@ -60,8 +60,6 @@ class MapReader : MonoBehaviour
                     Vector3 v1 = p1 - bounds.centre;
                     Vector3 v2 = p2 - bounds.centre;
 
-                    Vector3 v0 = new Vector3((float)0.0, (float)0.0);
-
                     Debug.DrawLine(v1, v2, c);
                 }
             }
