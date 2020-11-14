@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BuildingConstructor.cs" />
+    <Compile Include="Assets\Scripts\GameObjConstructor.cs" />
     <Compile Include="Assets\Scripts\MapReader.cs" />
     <Compile Include="Assets\Scripts\MercatorProjection.cs" />
     <Compile Include="Assets\Scripts\RoadConstructor.cs" />

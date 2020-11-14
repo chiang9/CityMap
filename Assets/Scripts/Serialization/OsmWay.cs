@@ -14,11 +14,13 @@ class OsmWay : BaseNode
 
     public List<ulong> nodeIDs { get; private set; }
 
-    public bool isBoundary { get; private set; }
-
     public float Height { get; private set; }
 
+    public bool isBoundary { get; private set; }
+
     public bool isBuilding { get; private set; }
+
+    public bool isRoad { get; private set; }
 
     public OsmWay(XmlNode node)
     {
@@ -60,6 +62,10 @@ class OsmWay : BaseNode
             else if (key == "building")
             {
                 isBuilding = true;
+            }
+            else if (key == "highway")
+            {
+                isRoad = true;
             }
         }
     }

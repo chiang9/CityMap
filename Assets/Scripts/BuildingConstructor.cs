@@ -3,10 +3,8 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(MapReader))]
-class BuildingConstructor : MonoBehaviour
+class BuildingConstructor : GameObjConstructor
 {
-    MapReader map;
 
     public Material buildingMat;
 
@@ -59,12 +57,12 @@ class BuildingConstructor : MonoBehaviour
                 normals.Add(-Vector3.forward);
                 normals.Add(-Vector3.forward);
 
-                int idx1, idx2, idx3, idx4;
-                idx4 = buildingVec.Count - 1;
-                idx3 = buildingVec.Count - 2;
-                idx2 = buildingVec.Count - 3;
-                idx1 = buildingVec.Count - 4;
+                int idx4 = 4 * i - 1;
+                int idx3 = 4 * i - 2;
+                int idx2 = 4 * i - 3;
+                int idx1 = 4 * i - 4;
 
+                
                 indx.Add(idx1);
                 indx.Add(idx3);
                 indx.Add(idx2);
@@ -80,6 +78,7 @@ class BuildingConstructor : MonoBehaviour
                 indx.Add(idx2);
                 indx.Add(idx4);
                 indx.Add(idx3);
+                
 
             }
 
@@ -92,17 +91,7 @@ class BuildingConstructor : MonoBehaviour
         }
     }
 
-    Vector3 GetCentre(OsmWay way)
-    {
-        Vector3 res = Vector3.zero;
-        float wayCount = way.nodeIDs.Count;
 
-        foreach (var id in way.nodeIDs)
-        {
-            res += map.nodes[id];
-        }
-        return res / wayCount;
-    }
 
 }
 
