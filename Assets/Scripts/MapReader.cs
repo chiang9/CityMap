@@ -2,6 +2,7 @@
 using System.Xml;
 using UnityEngine;
 
+
 class MapReader : MonoBehaviour
 {
     [HideInInspector]
@@ -18,29 +19,21 @@ class MapReader : MonoBehaviour
 
     public bool isReady { get; private set; }
 
+    public OsmHttpRequest OsmHttpRequest = new OsmHttpRequest();
+
     void Start()
     {
         nodes = new Dictionary<ulong, OsmNode>();
         ways = new List<OsmWay>();
 
-        var txtAsset = Resources.Load<TextAsset>(resourceFile);
-
-        XmlDocument doc = new XmlDocument();
-        doc.LoadXml(txtAsset.text);
+        XmlDocument doc = OsmHttpRequest.HttpGetOsm();
 
         SetBounds(doc.SelectSingleNode("/osm/bounds"));
         SetNodes(doc.SelectNodes("/osm/node"));
         GetWays(doc.SelectNodes("/osm/way"));
 
-        /*
-        float minx = (float)MercatorProjection.lonToX(bounds.minlon);
-        float maxx = (float)MercatorProjection.lonToX(bounds.maxlon);
-        float miny = (float)MercatorProjection.latToY(bounds.minlat);
-        float maxy = (float)MercatorProjection.latToY(bounds.maxlat);
-        */
-
         isReady = true;
-
+        
     }
 
     void Update()
