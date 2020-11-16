@@ -1,10 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
 
 class MapReader : MonoBehaviour
 {
+
+    public string maxlat;
+    public string minlat;
+    public string maxlon;
+    public string minlon;
+
+    public Terrain terrain;
+
+
     [HideInInspector]
     public Dictionary<ulong, OsmNode> nodes;
 
@@ -14,8 +24,8 @@ class MapReader : MonoBehaviour
     [HideInInspector]
     public List<OsmWay> ways;
 
-    [Tooltip("The resouce file for OSM data")]
-    public string resourceFile;
+    //[Tooltip("The resouce file for OSM data")]
+    //public string resourceFile;
 
     public bool isReady { get; private set; }
 
@@ -26,15 +36,19 @@ class MapReader : MonoBehaviour
         nodes = new Dictionary<ulong, OsmNode>();
         ways = new List<OsmWay>();
 
-        XmlDocument doc = OsmHttpRequest.HttpGetOsm();
+        XmlDocument doc = OsmHttpRequest.HttpGetOsm(maxlat, minlat, maxlon, minlon);
 
         SetBounds(doc.SelectSingleNode("/osm/bounds"));
         SetNodes(doc.SelectNodes("/osm/node"));
         GetWays(doc.SelectNodes("/osm/way"));
 
         isReady = true;
-        
+
+        init_setting();
+        Debug.Log(terrain.terrainData.size);
     }
+
+  
 
     void Update()
     {
@@ -57,6 +71,13 @@ class MapReader : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    private void init_setting()
+    {
+        terrain.transform.position = new Vector3(0-bounds.size.x/2,(float)-0.01,0-bounds.size.z/2);
+        terrain.terrainData.size = bounds.size;
     }
 
     void GetWays(XmlNodeList xmlNodeList)

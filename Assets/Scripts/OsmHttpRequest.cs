@@ -12,10 +12,10 @@ using System.Xml.Linq;
 
 public class OsmHttpRequest
 {
-    public XmlDocument HttpGetOsm()
+    public XmlDocument HttpGetOsm(string maxlat, string minlat, string maxlon, string minlon)
     {
         XmlDocument res = new XmlDocument();
-        var url = "https://api.openstreetmap.org/api/0.6/map?bbox=-118.28783,34.02063,-118.28147,34.02360";
+        var url = $"https://api.openstreetmap.org/api/0.6/map?bbox={minlon},{minlat},{maxlon},{maxlat}";
 
         using (var client = new HttpClient())
         {

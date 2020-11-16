@@ -23,7 +23,7 @@ class BuildingConstructor : GameObjConstructor
 
         foreach(var way in buildingData)
         {
-            GameObject go = new GameObject();
+            GameObject go = new GameObject(way.ID.ToString());
             Vector3 localOrigin = GetCentre(way);
             go.transform.position = localOrigin - map.bounds.centre;
 

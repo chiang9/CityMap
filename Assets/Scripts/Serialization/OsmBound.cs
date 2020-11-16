@@ -16,6 +16,8 @@ class OsmBound : BaseNode
 
     public Vector3 centre { get; private set; }
 
+    public Vector3 size { get; private set; }
+
 
     public OsmBound(XmlNode node)
     {
@@ -27,6 +29,9 @@ class OsmBound : BaseNode
         float x = (float)((MercatorProjection.lonToX(maxlon) + MercatorProjection.lonToX(minlon))) / 2;
         float y = (float)((MercatorProjection.latToY(maxlat) + MercatorProjection.latToY(minlat))) / 2;
 
+        float width = (float)((MercatorProjection.lonToX(maxlon) - MercatorProjection.lonToX(minlon)));
+        float length = (float)((MercatorProjection.latToY(maxlat) - MercatorProjection.latToY(minlat)));
+        size = new Vector3(width*2, 600, length*2);
         centre = new Vector3(x, 0, y);
 
     }

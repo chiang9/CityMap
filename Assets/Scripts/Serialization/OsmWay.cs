@@ -22,6 +22,8 @@ class OsmWay : BaseNode
 
     public bool isRoad { get; private set; }
 
+    public string name { get; private set; }
+
     public OsmWay(XmlNode node)
     {
         nodeIDs = new List<ulong>();
@@ -42,7 +44,13 @@ class OsmWay : BaseNode
             isBoundary = nodeIDs[0] == nodeIDs[nodeIDs.Count - 1];
         }
 
+        init_setting();
         tagClassification(node);
+    }
+
+    private void init_setting()
+    {
+        name = "Default Game Object";
     }
 
     private void tagClassification(XmlNode node)
@@ -66,6 +74,10 @@ class OsmWay : BaseNode
             else if (key == "highway")
             {
                 isRoad = true;
+            } 
+            else if (key == "name")
+            {
+                name = GetAttribute<string>("v", tag.Attributes);
             }
         }
     }
