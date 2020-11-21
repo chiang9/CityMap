@@ -38,6 +38,7 @@ class MapReader : MonoBehaviour
     {
         nodes = new Dictionary<ulong, OsmNode>();
         ways = new List<OsmWay>();
+        relations = new List<OsmRelation>();
 
         XmlDocument doc = OsmHttpRequest.HttpGetOsm(maxlat, minlat, maxlon, minlon);
 
@@ -129,12 +130,12 @@ class MapReader : MonoBehaviour
         bounds = new OsmBound(xmlNode);
     }
 
-    private void GetRelation(XmlNodeList xmlNodeList)
+    void GetRelation(XmlNodeList xmlNodeList)
     {
         foreach (XmlNode node in xmlNodeList)
         {
             OsmRelation rel = new OsmRelation(node);
-            ways.Add(rel);
+            relations.Add(rel);
         }
     }
 

@@ -36,9 +36,10 @@ class OsmRelation : BaseNode
 
     public OsmRelation(XmlNode node)
     {
-        ID = GetAttribute<ulong>("ref", node.Attributes);
+        ID = GetAttribute<ulong>("id", node.Attributes);
         visible = GetAttribute<bool>("visible", node.Attributes);
         Height = 3.0f;
+        members = new List<RelationMember>();
 
         XmlNodeList mem = node.SelectNodes("member");
         XmlNodeList tags = node.SelectNodes("tag");

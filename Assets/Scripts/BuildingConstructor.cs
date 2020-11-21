@@ -35,7 +35,7 @@ class BuildingConstructor : GameObjConstructor
             List<Vector3> buildingVec = new List<Vector3>();
             List<Vector3> normals = new List<Vector3>();
             List<int> indx = new List<int>();
-
+            List<int> roofindx = new List<int>();
 
             for (int i = 1; i < way.nodeIDs.Count; i++)
             {
@@ -78,8 +78,24 @@ class BuildingConstructor : GameObjConstructor
                 indx.Add(idx2);
                 indx.Add(idx4);
                 indx.Add(idx3);
-                
 
+                if (!roofindx.Contains(idx3))
+                {
+                    roofindx.Add(idx3);
+                }
+                if (!roofindx.Contains(idx4))
+                {
+                    roofindx.Add(idx4);
+                }
+
+            }
+
+
+            for (int i = 1; i < roofindx.Count-1; i++)
+            {
+                indx.Add(roofindx[0]);
+                indx.Add(roofindx[i]);
+                indx.Add(roofindx[i+1]);
             }
 
             mf.mesh.vertices = buildingVec.ToArray();
