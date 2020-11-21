@@ -136,6 +136,14 @@ class MapReader : MonoBehaviour
         {
             OsmRelation rel = new OsmRelation(node);
             relations.Add(rel);
+
+            if (rel.type == "multipolygon")
+            {
+                OsmWay item = ways.Find(x => x.ID == rel.members[0].nodeID);
+                item.Height = rel.Height;
+                item.isBuilding = true;
+                item.name = rel.name;
+            }
         }
     }
 

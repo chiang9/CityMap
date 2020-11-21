@@ -23,7 +23,7 @@ class BuildingConstructor : GameObjConstructor
 
         foreach(var way in buildingData)
         {
-            GameObject go = new GameObject(way.ID.ToString());
+            GameObject go = new GameObject(way.name);
             Vector3 localOrigin = GetCentre(way);
             go.transform.position = localOrigin - map.bounds.centre;
 
@@ -90,12 +90,14 @@ class BuildingConstructor : GameObjConstructor
 
             }
 
-
-            for (int i = 1; i < roofindx.Count-1; i++)
+            if (roofindx.Count > 3)
             {
-                indx.Add(roofindx[0]);
-                indx.Add(roofindx[i]);
-                indx.Add(roofindx[i+1]);
+                for (int i = 1; i < roofindx.Count - 1; i++)
+                {
+                    indx.Add(roofindx[0]);
+                    indx.Add(roofindx[i]);
+                    indx.Add(roofindx[i + 1]);
+                }
             }
 
             mf.mesh.vertices = buildingVec.ToArray();

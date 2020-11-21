@@ -13,15 +13,15 @@ class OsmWay : BaseNode
 
     public List<ulong> nodeIDs { get; private set; }
 
-    public float Height { get; private set; }
+    public float Height { get; set; }
 
     public bool isBoundary { get; private set; }
 
-    public bool isBuilding { get; private set; }
+    public bool isBuilding { get; set; }
 
     public bool isRoad { get; private set; }
 
-    public string name { get; private set; }
+    public string name { get; set; }
 
     public OsmWay(XmlNode node)
     {
