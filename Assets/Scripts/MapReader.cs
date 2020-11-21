@@ -24,6 +24,9 @@ class MapReader : MonoBehaviour
     [HideInInspector]
     public List<OsmWay> ways;
 
+    [HideInInspector]
+    public List<OsmRelation> relations;
+
     //[Tooltip("The resouce file for OSM data")]
     //public string resourceFile;
 
@@ -41,6 +44,7 @@ class MapReader : MonoBehaviour
         SetBounds(doc.SelectSingleNode("/osm/bounds"));
         SetNodes(doc.SelectNodes("/osm/node"));
         GetWays(doc.SelectNodes("/osm/way"));
+        GetRelation(doc.SelectNodes("/osm/relation"));
 
         isReady = true;
 
@@ -48,7 +52,7 @@ class MapReader : MonoBehaviour
         Debug.Log(terrain.terrainData.size);
     }
 
-  
+
 
     void Update()
     {
@@ -73,11 +77,32 @@ class MapReader : MonoBehaviour
         }
     }
 
+    private void create_terrain()
+    {
+        GameObject TerrainObj = new GameObject("TerrainObj");
+
+        TerrainData _TerrainData = new TerrainData();
+
+        _TerrainData.size = new Vector3(10, 600, 10);
+        _TerrainData.heightmapResolution = 512;
+        _TerrainData.baseMapResolution = 1024;
+        _TerrainData.SetDetailResolution(1024, 16);
+
+        int _heightmapWidth = _TerrainData.heightmapWidth;
+        int _heightmapHeight = _TerrainData.heightmapHeight;
+
+        TerrainCollider _TerrainCollider = TerrainObj.AddComponent<TerrainCollider>();
+        Terrain _Terrain2 = TerrainObj.AddComponent<Terrain>();
+
+        _TerrainCollider.terrainData = _TerrainData;
+        _Terrain2.terrainData = _TerrainData;
+    }
 
     private void init_setting()
     {
         terrain.transform.position = new Vector3(0-bounds.size.x/2,(float)-0.01,0-bounds.size.z/2);
         terrain.terrainData.size = bounds.size;
+        //create_terrain();
     }
 
     void GetWays(XmlNodeList xmlNodeList)
@@ -102,6 +127,15 @@ class MapReader : MonoBehaviour
     void SetBounds(XmlNode xmlNode)
     {
         bounds = new OsmBound(xmlNode);
+    }
+
+    private void GetRelation(XmlNodeList xmlNodeList)
+    {
+        foreach (XmlNode node in xmlNodeList)
+        {
+            OsmRelation rel = new OsmRelation(node);
+            ways.Add(rel);
+        }
     }
 
 }

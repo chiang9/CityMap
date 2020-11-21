@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Serialization\OsmBound.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmNode.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmNodeParser.cs" />
+    <Compile Include="Assets\Scripts\Serialization\OsmRelation.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmWay.cs" />
     <None Include="Assets\Resources\usc.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
