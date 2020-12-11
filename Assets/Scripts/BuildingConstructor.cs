@@ -26,9 +26,11 @@ class BuildingConstructor : GameObjConstructor
             GameObject go = new GameObject(way.name);
             Vector3 localOrigin = GetCentre(way);
             go.transform.position = localOrigin - map.bounds.centre;
+            
 
             MeshFilter mf = go.AddComponent<MeshFilter>();
             MeshRenderer mr = go.AddComponent<MeshRenderer>();
+            MeshCollider mc = go.AddComponent<MeshCollider>();
 
             mr.material = buildingMat;
 
@@ -103,6 +105,8 @@ class BuildingConstructor : GameObjConstructor
             mf.mesh.vertices = buildingVec.ToArray();
             mf.mesh.normals = normals.ToArray();
             mf.mesh.triangles = indx.ToArray();
+
+            mc.sharedMesh = mf.mesh;
 
             yield return null;
 

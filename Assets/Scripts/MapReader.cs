@@ -12,7 +12,9 @@ class MapReader : MonoBehaviour
     public string maxlon;
     public string minlon;
 
-    public Terrain terrain;
+    public TerrainData terrainData;
+
+    public TerrainLayer grassLayer;
 
 
     [HideInInspector]
@@ -27,8 +29,6 @@ class MapReader : MonoBehaviour
     [HideInInspector]
     public List<OsmRelation> relations;
 
-    //[Tooltip("The resouce file for OSM data")]
-    //public string resourceFile;
 
     public bool isReady { get; private set; }
 
@@ -50,7 +50,6 @@ class MapReader : MonoBehaviour
         isReady = true;
 
         init_setting();
-        Debug.Log(terrain.terrainData.size);
     }
 
 
@@ -76,34 +75,53 @@ class MapReader : MonoBehaviour
                 }
             }
         }
+
+        if (UnityEngine.Input.GetMouseButtonDown(0))
+        {
+            Debug.Log(gameObject.name + " here ");
+            Debug.Log("mouse down");
+        }
+
     }
+
 
     private void create_terrain()
     {
         GameObject TerrainObj = new GameObject("TerrainObj");
-
-        TerrainData _TerrainData = new TerrainData();
-
-        _TerrainData.size = new Vector3(10, 600, 10);
-        _TerrainData.heightmapResolution = 512;
-        _TerrainData.baseMapResolution = 1024;
-        _TerrainData.SetDetailResolution(1024, 16);
-
-        int _heightmapWidth = _TerrainData.heightmapWidth;
-        int _heightmapHeight = _TerrainData.heightmapHeight;
-
+        
         TerrainCollider _TerrainCollider = TerrainObj.AddComponent<TerrainCollider>();
         Terrain _Terrain2 = TerrainObj.AddComponent<Terrain>();
 
-        _TerrainCollider.terrainData = _TerrainData;
-        _Terrain2.terrainData = _TerrainData;
+        
+        _TerrainCollider.terrainData = terrainData;
+        _Terrain2.terrainData = terrainData;
+        _Terrain2.transform.position = new Vector3(0 - bounds.size.x / 2, (float)-0.01, 0 - bounds.size.z / 2);
+        _Terrain2.terrainData.size = bounds.size;
+        this.AddTerrainLayer(terrainData, grassLayer);
     }
 
+    void AddTerrainLayer(TerrainData terrainData, TerrainLayer inputLayer)
+    {
+        if (inputLayer == null)
+            return;
+
+        var layers = terrainData.terrainLayers;
+        for (var idx = 0; idx < layers.Length; ++idx)
+        {
+            if (layers[idx] == inputLayer)
+                return;
+        }
+
+        int newIndex = layers.Length;
+        var newarray = new TerrainLayer[newIndex + 1];
+        System.Array.Copy(layers, 0, newarray, 0, newIndex);
+        newarray[newIndex] = inputLayer;
+
+        terrainData.terrainLayers = newarray;
+    }
     private void init_setting()
     {
-        terrain.transform.position = new Vector3(0-bounds.size.x/2,(float)-0.01,0-bounds.size.z/2);
-        terrain.terrainData.size = bounds.size;
-        //create_terrain();
+        create_terrain();
     }
 
     void GetWays(XmlNodeList xmlNodeList)
