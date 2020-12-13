@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Serialization\OsmNodeParser.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmRelation.cs" />
     <Compile Include="Assets\Scripts\Serialization\OsmWay.cs" />
+    <Compile Include="Assets\Scripts\TerrainConstructor.cs" />
     <None Include="Assets\Resources\usc.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Owner/Documents/unity_dev/CityMap/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

@@ -47,9 +47,9 @@ class MapReader : MonoBehaviour
         GetWays(doc.SelectNodes("/osm/way"));
         GetRelation(doc.SelectNodes("/osm/relation"));
 
+        init_setting();
         isReady = true;
 
-        init_setting();
     }
 
 
@@ -75,53 +75,14 @@ class MapReader : MonoBehaviour
                 }
             }
         }
-
-        if (UnityEngine.Input.GetMouseButtonDown(0))
-        {
-            Debug.Log(gameObject.name + " here ");
-            Debug.Log("mouse down");
-        }
-
     }
 
 
-    private void create_terrain()
-    {
-        GameObject TerrainObj = new GameObject("TerrainObj");
-        
-        TerrainCollider _TerrainCollider = TerrainObj.AddComponent<TerrainCollider>();
-        Terrain _Terrain2 = TerrainObj.AddComponent<Terrain>();
 
-        
-        _TerrainCollider.terrainData = terrainData;
-        _Terrain2.terrainData = terrainData;
-        _Terrain2.transform.position = new Vector3(0 - bounds.size.x / 2, (float)-0.01, 0 - bounds.size.z / 2);
-        _Terrain2.terrainData.size = bounds.size;
-        this.AddTerrainLayer(terrainData, grassLayer);
-    }
-
-    void AddTerrainLayer(TerrainData terrainData, TerrainLayer inputLayer)
-    {
-        if (inputLayer == null)
-            return;
-
-        var layers = terrainData.terrainLayers;
-        for (var idx = 0; idx < layers.Length; ++idx)
-        {
-            if (layers[idx] == inputLayer)
-                return;
-        }
-
-        int newIndex = layers.Length;
-        var newarray = new TerrainLayer[newIndex + 1];
-        System.Array.Copy(layers, 0, newarray, 0, newIndex);
-        newarray[newIndex] = inputLayer;
-
-        terrainData.terrainLayers = newarray;
-    }
     private void init_setting()
     {
-        create_terrain();
+        //create_terrain();
+        
     }
 
     void GetWays(XmlNodeList xmlNodeList)

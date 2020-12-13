@@ -275,6 +275,8 @@ GameObject:
   - component: {fileID: 879941302}
   - component: {fileID: 879941304}
   - component: {fileID: 879941305}
+  - component: {fileID: 879941306}
+  - component: {fileID: 879941307}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -341,3 +343,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadMaterial: {fileID: 2100000, guid: 3f444de31c0bad24f8aa88e6e31bd3c1, type: 2}
+--- !u!114 &879941306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879941301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e61f69362b7ce40ad5f5053f6bfd83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &879941307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879941301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b4885d0d20c38479bbc260f32ed572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cityMaterial: {fileID: 2100000, guid: a5a564da052bd384581b0ec19e17a50d, type: 2}
+  grassMaterial: {fileID: 2100000, guid: a89b3b26e2f0c0d46843647d300f69d0, type: 2}

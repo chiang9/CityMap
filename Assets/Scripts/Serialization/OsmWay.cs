@@ -23,6 +23,8 @@ class OsmWay : BaseNode
 
     public string name { get; set; }
 
+    public bool isPark { get; set; }
+
     public OsmWay(XmlNode node)
     {
         nodeIDs = new List<ulong>();
@@ -77,6 +79,13 @@ class OsmWay : BaseNode
             else if (key == "name")
             {
                 name = GetAttribute<string>("v", tag.Attributes);
+            }
+            else if (key == "leisure")
+            {
+                if (GetAttribute<string>("v",tag.Attributes) == "park")
+                {
+                    isPark = true;
+                }
             }
         }
     }
